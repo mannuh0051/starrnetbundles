@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>starnet</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #00c9ff, #92fe9d);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(90deg, #008000, #00b894);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .bundle {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+      border-left: 8px solid #00c853;
+    }
+
+    .bundle:hover {
+      transform: scale(1.02);
+      background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+    }
+
+    .bundle h3 {
+      margin: 0.5rem 0;
+      color: #00796b;
+    }
+
+    .bundle p {
+      margin: 0.3rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(90deg, #00c853, #64dd17);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #009624, #558b2f);
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 14px;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .highlight-copy {
+      margin: 1rem 0 1.5rem;
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .copy-label {
+      margin: 0.3rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #004d40;
+    }
+
+    .big-copy {
+      display: inline-block;
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 0.4rem 1rem;
+      margin: 0.3rem 0 0.4rem;
+      background: white;
+      border: 2px solid #4caf50;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .big-copy:hover {
+      background: #d9fdd3;
+      transform: scale(1.05);
+    }
+
+    .copy-feedback {
+      font-size: 0.9rem;
+      color: #388e3c;
+      margin-top: 0.3rem;
+    }
+
+    .close-btn {
+      margin-top: 1.2rem;
+      background: linear-gradient(90deg, #ff5252, #e53935);
+    }
+
+    .close-btn:hover {
+      background: linear-gradient(90deg, #c62828, #b71c1c);
+    }
+
+    .stats-btn {
+      display: none;
+      margin: 2rem auto;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .stats-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #4a148c, #6a1b9a);
+    }
+
+    .stats-box {
+      text-align: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f3e5f5;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>starnet bundles</header>
+
+  <div class="container">
+    <div class="bundle">
+      <h3>24 Hours - 7GB</h3>
+      <p>High-speed internet<br>Works on all networks</p>
+      <p><strong>Ksh 49</strong></p>
+      <button class="btn" onclick="openPopup('24 Hours - 7GB', '49')">Buy</button>
+    </div>
+
+    <div class="bundle">
+      <h3>7 Days - 10GB</h3>
+      <p>High-speed internet<br>Works on all networks</p>
+      <p><strong>Ksh 59</strong></p>
+      <button class="btn" onclick="openPopup('7 Days - 10GB', '59')">Buy</button>
+    </div>
+
+    <div class="bundle">
+      <h3>7 Days - 15GB</h3>
+      <p>High-speed internet<br>Works on all networks</p>
+      <p><strong>Ksh 69</strong></p>
+      <button class="btn" onclick="openPopup('7 Days - 15GB', '69')">Buy</button>
+    </div>
+
+    <div class="bundle">
+      <h3>21 Days - 25GB</h3>
+      <p>High-speed internet<br>Works on all networks</p>
+      <p><strong>Ksh 89</strong></p>
+      <button class="btn" onclick="openPopup('21 Days - 25GB', '89')">Buy</button>
+    </div>
+
+    <div class="bundle">
+      <h3>30 Days - 50GB</h3>
+      <p>High-speed internet<br>Works on all networks</p>
+      <p><strong>Ksh 99</strong></p>
+      <button class="btn" onclick="openPopup('30 Days - 50GB', '99')">Buy</button>
+    </div>
+
+    <button class="stats-btn" onclick="showStats()">📊 Show Stats</button>
+    <div class="stats-box" id="statsBox" style="display:none;"></div>
+  </div>
+
+  <div class="popup" id="popup" onclick="closeOutside(event)">
+    <div class="popup-content">
+      <h2>M-Pesa Payment Instructions</h2>
+      <div class="highlight-copy" onclick="copyText('6977936')">
+        <p class="copy-label">Till Number:</p>
+        <span class="copyable big-copy">6977936</span>
+        <div class="copy-feedback" id="copyFeedback">📋 Click to copy</div>
+      </div>
+      <p id="selected-plan"></p>
+      <hr>
+      <p><strong>Steps to Complete Your Payment:</strong></p>
+<p><strong>Steps to Complete Your Payment:</strong></p>
+<p>1. Go to M-Pesa on your phone</p>
+<p>2. Select <b>Lipa na M-Pesa</b></p>
+<p>3. Select <b>Buy Goods and Services</b></p>
+<p>4. Enter Till Number: <b>6977936</b></p>
+<p>5. Enter Amount: <span id="bundle-amount"></span></p>
+<p>6. Confirm and complete the payment</p>
+<button class="btn close-btn" onclick="closePopup()">Close</button>
+</div>
+</div>
+
+<!-- Footer -->
+<footer style="text-align:center; padding:1rem; background:#004d40; color:white; font-size:0.95rem; margin-top:2rem;">
+  📧 Contact us: <a href="mailto:starnetbunles@gmail.com" style="color:#a5d6a7; text-decoration:none;">starnetbunles@gmail.com</a>
+</footer>
+
+<script>
+  function openPopup(plan, amount) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("selected-plan").innerText = `Selected Plan: ${plan}`;
+    document.getElementById("bundle-amount").innerText = `Ksh ${amount}`;
+
+    let clicks = localStorage.getItem("bundleClicks") || 0;
+    localStorage.setItem("bundleClicks", parseInt(clicks) + 1);
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+  function closeOutside(e) {
+    if (e.target.id === "popup") {
+      closePopup();
+    }
+  }
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const feedback = document.getElementById("copyFeedback");
+      feedback.innerText = "✅ Copied!";
+      setTimeout(() => {
+        feedback.innerText = "📋 Click to copy";
+      }, 2000);
+    });
+
+    let copyCount = localStorage.getItem("copyCount") || 0;
+    localStorage.setItem("copyCount", parseInt(copyCount) + 1);
+  }
+
+  function showStats() {
+    let visits = localStorage.getItem("visits") || 0;
+    let clicks = localStorage.getItem("bundleClicks") || 0;
+    let copyCount = localStorage.getItem("copyCount") || 0;
+    document.getElementById("statsBox").innerHTML = `
+      <h3>📈 Usage Stats</h3>
+      <p><strong>Page Visits:</strong> ${visits}</p>
+      <p><strong>Bundle Clicks:</strong> ${clicks}</p>
+      <p><strong>Copy Actions:</strong> ${copyCount}</p>
+    `;
+    document.getElementById("statsBox").style.display = "block";
+  }
+
+  window.onload = () => {
+    let visits = localStorage.getItem("visits") || 0;
+    localStorage.setItem("visits", parseInt(visits) + 1);
+  };
+
+  document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === "S") {
+      const statsBtn = document.querySelector(".stats-btn");
+      if (statsBtn) {
+        statsBtn.style.display = "block";
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
